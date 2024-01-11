@@ -116,6 +116,7 @@ public static class Startup
         builder.Services.AddScoped<IRoomInterface, RoomRepository>();
         builder.Services.AddScoped<IRoomStatusInterface, RoomStatusRepository>();
         builder.Services.AddScoped<IRoomTypeInterface, RoomTypeRepository>();
+        builder.Services.AddScoped<IResultInterface, ResultRepository>();
         builder.Services.AddScoped<IClientInterface, ClientRepository>();
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -128,6 +129,7 @@ public static class Startup
         builder.Services.AddScoped<IClientService, ClientService>();
         builder.Services.AddScoped<IRoomStatusService, RoomStatusServices>();
         builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
+        builder.Services.AddTransient<IOnlineBronService, OnlineBronService>();
         #endregion
 
         #region Mapper Profile

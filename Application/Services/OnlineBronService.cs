@@ -18,7 +18,7 @@ public class OnlineBronService(IUnitOfWork unitOfWork, IMapper mapper) : IOnline
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IMapper _mapper = mapper;
 
-    public async Task AddAsync(AddOnlineBromDto addOnlineBromDto)
+    public async Task AddAsync(AddOnlineBronDto addOnlineBromDto)
     {
         if (addOnlineBromDto == null)
         {

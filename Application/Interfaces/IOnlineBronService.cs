@@ -8,7 +8,7 @@ public interface IOnlineBronService
 {
     Task<List<OnlineBronDto>> GetAllAsync();
     Task<OnlineBronDto> GetByIdAsync(int id);
-    Task AddAsync(AddOnlineBromDto addOnlineBromDto);
+    Task AddAsync(AddOnlineBronDto addOnlineBromDto);
     Task UpdateAsync(UpdateOnlineBronDto updateOnlineBronDto);
     Task DeleteAsync(int id);
 }

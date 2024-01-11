@@ -1,6 +1,6 @@
 ﻿namespace Application.DTOs.RoomsDtos.OnlineBronDtos;
 
-public class AddOnlineBromDto
+public class AddOnlineBronDto
 {
     public int RoomNumber { get; set; }
     public int PersonCount { get; set; }

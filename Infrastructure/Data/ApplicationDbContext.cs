@@ -19,6 +19,7 @@ public class ApplicationDbContext (DbContextOptions<ApplicationDbContext> option
     public DbSet<Client> Clients { get; set; }
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderStatus> OrderStatuses { get; set; }
+    public DbSet<OnlineBron> OnlineBrons { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

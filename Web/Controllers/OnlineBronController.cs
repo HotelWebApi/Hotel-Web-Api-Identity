@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.DTOs.RoomsDtos;
+using Application.DTOs.OrderDtos.OrderStatusDtos;
+using Application.DTOs.RoomsDtos.OnlineBronDtos;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,18 +9,17 @@ namespace Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "Admin, SuperAdmin")]
-public class RoomController(IRoomService roomService) : ControllerBase
+[Authorize(Roles = "Admin, SuperAdmin, User")]
+public class OnlineBronController(IOnlineBronService onlineBronService) : ControllerBase
 {
-    private readonly IRoomService _roomService = roomService;
-
-    [HttpGet("Get-all")]
-    public async Task<IActionResult> Get()
+    private readonly IOnlineBronService _onlineBronService = onlineBronService;
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
     {
         try
         {
-            var rooms = await _roomService.GetAllAsync();
-            return Ok(rooms);
+            var onlineBook = await _onlineBronService.GetAllAsync();
+            return Ok(onlineBook);
         }
         catch (CustomException ex)
         {
@@ -30,32 +30,36 @@ public class RoomController(IRoomService roomService) : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
-
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        try
+        try 
         {
-            var room = await _roomService.GetByIdAsync(id);
-            return Ok(room);
+            var onlineBook = await _onlineBronService.GetByIdAsync(id);
+            return Ok(onlineBook);
         }
         catch (ArgumentNullException ex)
         {
             return NotFound(ex.Message);
         }
+
+        catch (CustomException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
         catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
-
     [HttpPost]
-    public async Task<IActionResult> Add(AddRoomDto roomDto)
+    public async Task<IActionResult> Add(AddOnlineBronDto addOnlineBromDto)
     {
         try
         {
-            await _roomService.AddAsync(roomDto);
-            return Ok("added");
+            await _onlineBronService.AddAsync(addOnlineBromDto);
+            return Ok("Added");
         }
         catch (ArgumentNullException ex)
         {
@@ -72,28 +76,13 @@ public class RoomController(IRoomService roomService) : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
-
-    [HttpGet("paged")]
-    public async Task<IActionResult> Get(int pageSize = 10, int pageNumber = 1)
-    {
-        try
-        {
-            var rooms = await _roomService.GetAllPagedAsync(pageSize, pageNumber);
-            return Ok(rooms);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
-    }
-
     [HttpPut]
-    public async Task<IActionResult> Put(UpdateRoomDto dto)
+    public async Task<IActionResult> Update(UpdateOnlineBronDto updateOnlineBronDto)
     {
         try
         {
-            await _roomService.UpdateAsync(dto);
-            return Ok("updated");
+            await _onlineBronService.UpdateAsync(updateOnlineBronDto);
+            return Ok("Updated");
         }
         catch (ArgumentNullException ex)
         {
@@ -108,18 +97,21 @@ public class RoomController(IRoomService roomService) : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
-
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
     {
         try
         {
-            await _roomService.DeleteAsync(id);
-            return Ok("deleted");
+            await _onlineBronService.DeleteAsync(id);
+            return Ok("Deleted");
         }
         catch (ArgumentNullException ex)
         {
             return NotFound(ex.Message);
+        }
+        catch (CustomException ex)
+        {
+            return BadRequest(ex.Message);
         }
         catch (Exception ex)
         {
