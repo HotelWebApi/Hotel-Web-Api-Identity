@@ -130,6 +130,7 @@ public static class Startup
         builder.Services.AddScoped<IRoomStatusService, RoomStatusServices>();
         builder.Services.AddScoped<IRoomTypeService, RoomTypeService>();
         builder.Services.AddTransient<IOnlineBronService, OnlineBronService>();
+        builder.Services.AddTransient<IResultService, ResultService>();
         #endregion
 
         #region Mapper Profile

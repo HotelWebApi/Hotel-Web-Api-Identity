@@ -12,9 +12,9 @@ using Domain.Entities.Orders;
 using Domain.Entities.Rooms;
 using Domain.Entities.Staffs;
 using Application.DTOs.ClientDtos;
-using Domain.Entities.Clients;
 using Application.DTOs.RoomsDtos.OnlineBronDtos;
 using Application.DTOs.ResultDtos;
+using Domain.Entities.Clients;
 namespace Application.Common.AutoMapperProfiles;
 
 public class AutoMapperProfile : Profile
@@ -79,7 +79,7 @@ public class AutoMapperProfile : Profile
 
         #region Result
         CreateMap<AddResultDto, Result>();
-        CreateMap<ResultDto, Result>();
+        CreateMap<ResultDto, Result>().ReverseMap();
         #endregion
     }
 }
