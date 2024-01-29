@@ -12,5 +12,7 @@ public interface IUnitOfWork : IDisposable
     IRoomStatusInterface RoomStatusInterface { get; }
     IRoomTypeInterface RoomTypeInterface { get; }
 
+    IResultInterface ResultInterface { get; }
+
     Task SaveAsync();
 }
